@@ -1,21 +1,15 @@
-const util = require('util');
+ /* 
+ Parse an address with the url.parse() method, and it will 
+ return a URL object with each part of the address as properties:
+ */
 
+const url = require('url');
+const adr = 'http://localhost:8080/default.htm?year=2017&month=february';
+const q = url.parse(adr, true);
 
-console.log('Hello %s from %s', 'Jitendra', {city: 'Pune'}) // Hello Jitendra from [object Object]
-console.log('t', {city: 'Pune'}) // t { city: 'Pune' }
-console.log(util.inspect({city: 'Pune'})) // '{ city: \'Pune\' }'
+console.log(q.host); //returns 'localhost:8080'
+console.log(q.pathname); //returns '/default.htm'
+console.log(q.search); //returns '?year=2017&month=february'
 
-
-const txt = 'Congratulate %s on his %dth birthday!';
-const result = util.format(txt, 'Linus', 6);
-
-console.log(result);
-
-/*
-Method	Description
-debuglog()	Writes debug messages to the error object
-deprecate()	Marks the specified function as deprecated
-format()	Formats the specified string, using the specified arguments
-inherits()	Inherits methods from one function into another
-inspect()	Inspects the specified object and returns the object as a string
-*/
+const qdata = q.query; //returns an object: { year: 2017, month: 'february' }
+console.log(qdata.month); //returns 'february'
